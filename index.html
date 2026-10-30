@@ -510,41 +510,6 @@ if(pos<window.innerHeight-100){b.classList.add('show');}
       <a href="#" style="margin:0 10px; color:#00e0ff;">Instagram</a>
     </div>
 
-  </div>
-</section>
-<button onclick="speakMotivation()" style="
-padding:12px 20px;
-background:#00e0ff;
-border:none;
-border-radius:8px;
-cursor:pointer;
-font-weight:bold;
-">
-🎧 Get Motivation
-</button>
-<script>
-function speakMotivation(){
-
-const text = "You are stronger than you think. Every small step you take today is building your future. Stay consistent, stay focused, and never give up.";
-
-const speech = new SpeechSynthesisUtterance(text);
-
-// Voice settings
-speech.rate = 0.9;   // slow calm speed
-speech.pitch = 1;    // normal pitch
-speech.volume = 1;
-
-// Female voice select (auto)
-const voices = speechSynthesis.getVoices();
-const femaleVoice = voices.find(v => v.name.toLowerCase().includes("female") || v.name.toLowerCase().includes("zira") || v.name.toLowerCase().includes("google"));
-
-if(femaleVoice){
-    speech.voice = femaleVoice;
-}
-
-speechSynthesis.speak(speech);
-}
-</script>
 <style>
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
@@ -658,47 +623,7 @@ backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 's
     <div class="energy-line"></div>
     <div class="energy-line delay"></div>
     <div class="energy-line delay2"></div>
-</div>
- <button onclick="startAI()" class="ai-btn">🤖 Activate AI</button>
-</section>
-<script>
-function startAI(){
 
-const text = "Hello, I am Shreyansh. A passionate developer who creates futuristic digital experiences. I don't just build websites, I build ideas into reality. Welcome to my world.";
-
-const speech = new SpeechSynthesisUtterance(text);
-
-// Wait for voices to load properly
-let voices = speechSynthesis.getVoices();
-
-if(voices.length === 0){
-    speechSynthesis.onvoiceschanged = () => {
-        voices = speechSynthesis.getVoices();
-        speakNow(voices);
-    };
-}else{
-    speakNow(voices);
-}
-
-function speakNow(voices){
-    const voice = voices.find(v => 
-        v.name.toLowerCase().includes("google") ||
-        v.name.toLowerCase().includes("english")
-    );
-
-    if(voice){
-        speech.voice = voice;
-    }
-
-    speech.rate = 0.9;
-    speech.pitch = 1;
-    speech.volume = 1;
-
-    speechSynthesis.speak(speech);
-}
-
-}
-</script>
 <script>
 function openContact(){
     document.getElementById("contactBox").style.display = "flex";
