@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hand Gesture 3D Particle Controller</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3/camera_utils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.3/drawing_utils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4/hands.js"></script>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: #04050a;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+  }
+
+  #scene {
+    position: fixed;
+    inset: 0;
+  }
+
+  #cameraBox {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 400px;
+    background: rgba(0, 0, 0, 0.75);
+    border: 1px solid #22d3ee;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 0 35px rgba(34, 211, 238, 0.35);
+  }
+
+  #cameraBox video {
+    display: none;
+  }
+
+  #handCanvas {
+    width: 100%;
+    display: block;
+  }
+
+  #status {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 18px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    font-size: 14px;
+  }
+</style>
+</head>
+
+<body>
+
+<div id="scene"></div>
+
+<div id="status">Starting camera...</div>
+
+<div id="cameraBox">
+  <video id="video" playsinline></video>
+  <canvas id="handCanvas" width="800" height="600"></canvas>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from "three";
+
+/* ---------------- 3D Scene ---------------- */
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x04050a);
+scene.fog = new THREE.FogExp2(0x04050a, 0.035);
+
+const camera = new THREE.PerspectiveCamera(
+  65,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  120
+);
+
+camera.position.set(0, 0, 8);
+
+const renderer = new THREE.WebGLRenderer({
+  antialias: true,
+  alpha: true,
+  powerPreference: "high-performance"
+});
+
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+document.getElementById("scene").appendChild(renderer.domElement);
+
+/* ---------------- Deep Particle Model ---------------- */
+
+const particleCount = 25000;
+
+const positions = new Float32Array(particleCount * 3);
+const colors = new Float32Array(particleCount * 3);
+const basePositions = new Float32Array(particleCount * 3);
+
+const colorA = new THREE.Color(0x22d3ee);
+const colorB = new THREE.Color(0xa855f7);
+const colorC = new THREE.Color(0xff3b7f);
+const tempColor = new THREE.Color();
+
+for (let i = 0; i < particleCount; i++) {
+  const radius = Math.cbrt(Math.random()) * 3.2;
+  const theta = Math.random() * Math.PI * 2;
+  const phi = Math.acos(2 * Math.random() - 1);
+
+  const x = radius * Math.sin(phi) * Math.cos(theta);
+  const y = radius * Math.sin(phi) * Math.sin(theta);
+  const z = radius * Math.cos(phi);
+
+  basePositions[i * 3] = x;
+  basePositions[i * 3 + 1] = y;
+  basePositions[i * 3 + 2] = z;
+
+  positions[i * 3] = x;
+  positions[i * 3 + 1] = y;
+  positions[i * 3 + 2] = z;
+
+  const mix = Math.random();
+
+  if (mix < 0.45) {
+    tempColor.copy(colorA);
+  } else if (mix < 0.85) {
+    tempColor.copy(colorB);
+  } else {
+    tempColor.copy(colorC);
+  }
+
+  colors[i * 3] = tempColor.r;
+  colors[i * 3 + 1] = tempColor.g;
+  colors[i * 3 + 2] = tempColor.b;
+}
+
+const geometry = new THREE.BufferGeometry();
+
+geometry.setAttribute(
+  "position",
+  new THREE.BufferAttribute(positions, 3)
+);
+
+geometry.setAttribute(
+  "color",
+  new THREE.BufferAttribute(colors, 3)
+);
+
+const material = new THREE.PointsMaterial({
+  size: 0.045,
+  vertexColors: true,
+  transparent: true,
+  opacity: 0.92,
+  blending: THREE.AdditiveBlending,
+  depthWrite: false,
+  sizeAttenuation: true
+});
+
+const particles = new THREE.Points(geometry, material);
+scene.add(particles);
+
+/* ---------------- Glowing Core ---------------- */
+
+const coreGeometry = new THREE.IcosahedronGeometry(0.8, 4);
+
+const coreMaterial = new THREE.MeshBasicMaterial({
+  color: 0x22d3ee,
+  wireframe: true,
+  transparent: true,
+  opacity: 0.22
+});
+
+const core = new THREE.Mesh(coreGeometry, coreMaterial);
+particles.add(core);
+
+/* ---------------- Outer Energy Ring ---------------- */
+
+const ringGeometry = new THREE.TorusGeometry(
+  3.4,
+  0.015,
+  8,
+  180
+);
+
+const ringMaterial = new THREE.MeshBasicMaterial({
+  color: 0xa855f7,
+  transparent: true,
+  opacity: 0.35
+});
+
+const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+ring.rotation.x = Math.PI / 2.2;
+particles.add(ring);
+
+/* ---------------- Gesture State ---------------- */
+
+const target = {
+  rotationX: 0,
+  rotationY: 0,
+  scale: 1,
+  depth: 0
+};
+
+const smooth = {
+  rotationX: 0,
+  rotationY: 0,
+  scale: 1,
+  depth: 0
+};
+
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function distance(a, b) {
+  return Math.hypot(a.x - b.x, a.y - b.y);
+}
+
+/* ---------------- MediaPipe Hands ---------------- */
+
+const video = document.getElementById("video");
+const handCanvas = document.getElementById("handCanvas");
+const ctx = handCanvas.getContext("2d");
+const statusEl = document.getElementById("status");
+
+const hands = new Hands({
+  locateFile: (file) =>
+    `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4/${file}`
+});
+
+hands.setOptions({
+  maxNumHands: 1,
+  modelComplexity: 1,
+  minDetectionConfidence: 0.6,
+  minTrackingConfidence: 0.6,
+  selfieMode: false
+});
+
+hands.onResults(onResults);
+
+const mpCamera = new Camera(video, {
+  onFrame: async () => {
+    await hands.send({ image: video });
+  },
+  width: 800,
+  height: 600
+});
+
+mpCamera.start()
+  .then(() => {
+    statusEl.textContent = "Camera ready — show your hand";
+  })
+  .catch(() => {
+    statusEl.textContent =
+      "Allow camera access and open this page using localhost or HTTPS.";
+  });
+
+/* ---------------- Landmark Smoothing ---------------- */
+
+let previousLandmarks = null;
+
+function smoothLandmarks(current) {
+  if (!previousLandmarks) {
+    previousLandmarks = current.map((point) => ({ ...point }));
+    return current;
+  }
+
+  const smoothing = 0.55;
+
+  for (let i = 0; i < current.length; i++) {
+    previousLandmarks[i].x +=
+      (current[i].x - previousLandmarks[i].x) * smoothing;
+
+    previousLandmarks[i].y +=
+      (current[i].y - previousLandmarks[i].y) * smoothing;
+
+    previousLandmarks[i].z +=
+      (current[i].z - previousLandmarks[i].z) * smoothing;
+  }
+
+  return previousLandmarks;
+}
+
+/* ---------------- Hand Result Handling ---------------- */
+
+function onResults(results) {
+  ctx.save();
+
+  ctx.clearRect(
+    0,
+    0,
+    handCanvas.width,
+    handCanvas.height
+  );
+
+  ctx.translate(handCanvas.width, 0);
+  ctx.scale(-1, 1);
+
+  ctx.drawImage(
+    results.image,
+    0,
+    0,
+    handCanvas.width,
+    handCanvas.height
+  );
+
+  if (
+    !results.multiHandLandmarks ||
+    results.multiHandLandmarks.length === 0
+  ) {
+    previousLandmarks = null;
+
+    statusEl.textContent =
+      "No hand detected — move closer and keep your hand well lit.";
+
+    ctx.restore();
+    return;
+  }
+
+  const landmarks = smoothLandmarks(
+    results.multiHandLandmarks[0]
+  );
+
+  drawHand(landmarks);
+  drawFingerCoordinates(landmarks);
+  applyGestureControl(landmarks);
+
+  ctx.restore();
+}
+
+/* ---------------- Draw Hand ---------------- */
+
+function drawHand(lm) {
+  const connections = [
+    [0, 1], [1, 2], [2, 3], [3, 4],
+    [0, 5], [5, 6], [6, 7], [7, 8],
+    [5, 9], [9, 10], [10, 11], [11, 12],
+    [9, 13], [13, 14], [14, 15], [15, 16],
+    [13, 17], [17, 18], [18, 19], [19, 20],
+    [0, 17]
+  ];
+
+  ctx.strokeStyle = "#22d3ee";
+  ctx.lineWidth = 3.5;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+
+  for (const [a, b] of connections) {
+    ctx.moveTo(
+      lm[a].x * handCanvas.width,
+      lm[a].y * handCanvas.height
+    );
+
+    ctx.lineTo(
+      lm[b].x * handCanvas.width,
+      lm[b].y * handCanvas.height
+    );
+  }
+
+  ctx.stroke();
+
+  const fingertips = [4, 8, 12, 16, 20];
+
+  for (const tip of fingertips) {
+    const x = lm[tip].x * handCanvas.width;
+    const y = lm[tip].y * handCanvas.height;
+
+    ctx.beginPath();
+    ctx.arc(x, y, 8, 0, Math.PI * 2);
+    ctx.fillStyle = "#ff3b7f";
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(x, y, 13, 0, Math.PI * 2);
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.55)";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+}
+
+/* ---------------- Fingertip Coordinates ---------------- */
+
+function drawFingerCoordinates(lm) {
+  const fingers = [
+    { name: "Thumb", tip: 4 },
+    { name: "Index", tip: 8 },
+    { name: "Middle", tip: 12 },
+    { name: "Ring", tip: 16 },
+    { name: "Pinky", tip: 20 }
+  ];
+
+  ctx.font = "bold 15px monospace";
+  ctx.textAlign = "center";
+
+  for (const finger of fingers) {
+    const point = lm[finger.tip];
+    const x = point.x * handCanvas.width;
+    const y = point.y * handCanvas.height;
+
+    const text =
+      `X: ${(point.x * 100).toFixed(1)}  ` +
+      `Y: ${(point.y * 100).toFixed(1)}`;
+
+    const textWidth = ctx.measureText(text).width;
+    const boxX = x - textWidth / 2 - 9;
+    const boxY = y - 48;
+    const boxW = textWidth + 18;
+    const boxH = 26;
+
+    ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
+    ctx.beginPath();
+    ctx.roundRect(boxX, boxY, boxW, boxH, 7);
+    ctx.fill();
+
+    ctx.strokeStyle = "#22d3ee";
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    ctx.fillStyle = "#ffffff";
+    ctx.fillText(text, x, y - 29);
+
+    ctx.beginPath();
+    ctx.moveTo(x, y - 22);
+    ctx.lineTo(x, y - 10);
+    ctx.strokeStyle = "#22d3ee";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+}
+
+/* ---------------- Proportional Gesture Control ---------------- */
+
+function applyGestureControl(lm) {
+  const wrist = lm[0];
+
+  const aspect =
+    (video.videoWidth || 800) /
+    (video.videoHeight || 600);
+
+  function handDistance(a, b) {
+    return Math.hypot(
+      (a.x - b.x) * aspect,
+      a.y - b.y
+    );
+  }
+
+  const palmSize = Math.max(
+    handDistance(lm[0], lm[9]),
+    0.025
+  );
+
+  const fingerTips = [8, 12, 16, 20];
+  let totalOpenness = 0;
+
+  for (const tip of fingerTips) {
+    const fingerReach =
+      handDistance(lm[tip], wrist) / palmSize;
+
+    const fingerOpenness = clamp(
+      (fingerReach - 0.95) / 0.95,
+      0,
+      1
+    );
+
+    totalOpenness += fingerOpenness;
+  }
+
+  // Closed hand = 0; fully open hand = 1.
+  const openness = totalOpenness / fingerTips.length;
+
+  // Expand and contract continuously with hand openness.
+  target.scale = 0.45 + openness * (3.2 - 0.45);
+  target.depth = openness * 1.6;
+
+  // Preserve the existing directional rotation behavior.
+  const indexExtended =
+    distance(lm[8], lm[0]) >
+    distance(lm[6], lm[0]) * 1.25;
+
+  const middleExtended =
+    distance(lm[12], lm[0]) >
+    distance(lm[10], lm[0]) * 1.25;
+
+  const pinkyExtended =
+    distance(lm[20], lm[0]) >
+    distance(lm[18], lm[0]) * 1.2;
+
+  const openHand =
+    indexExtended &&
+    middleExtended &&
+    pinkyExtended;
+
+  const fist =
+    !indexExtended &&
+    !middleExtended &&
+    !pinkyExtended;
+
+  if (openHand) {
+    const horizontal = wrist.x - 0.5;
+    const vertical = wrist.y - 0.5;
+
+    target.rotationY = clamp(
+      horizontal * Math.PI * 2.4,
+      -Math.PI,
+      Math.PI
+    );
+
+    target.rotationX = clamp(
+      vertical * Math.PI * 2,
+      -Math.PI / 1.4,
+      Math.PI / 1.4
+    );
+  }
+
+  if (fist) {
+    target.rotationY = smooth.rotationY;
+    target.rotationX = smooth.rotationX;
+  }
+
+  statusEl.textContent =
+    `Hand openness: ${Math.round(openness * 100)}%`;
+}
+
+/* ---------------- Animation Loop ---------------- */
+
+function animate(time) {
+  requestAnimationFrame(animate);
+
+  // Smooth rotation.
+  smooth.rotationY +=
+    (target.rotationY - smooth.rotationY) * 0.06;
+
+  smooth.rotationX +=
+    (target.rotationX - smooth.rotationX) * 0.06;
+
+  particles.rotation.y = smooth.rotationY;
+  particles.rotation.x = smooth.rotationX;
+
+  // Preserve the existing scale and depth smoothing.
+  smooth.scale +=
+    (target.scale - smooth.scale) * 0.07;
+
+  smooth.depth +=
+    (target.depth - smooth.depth) * 0.07;
+
+  particles.scale.setScalar(smooth.scale);
+
+  const positionAttribute = geometry.attributes.position;
+
+  for (let i = 0; i < particleCount; i++) {
+    const ix = i * 3;
+    const iy = ix + 1;
+    const iz = ix + 2;
+
+    const wave =
+      Math.sin(
+        time * 0.0007 + basePositions[ix] * 0.7
+      ) * 0.08 +
+      Math.cos(
+        time * 0.0005 + basePositions[iy] * 0.6
+      ) * 0.08;
+
+    positionAttribute.array[ix] =
+      basePositions[ix] *
+      (1 + smooth.depth * 0.25) +
+      wave;
+
+    positionAttribute.array[iy] =
+      basePositions[iy] *
+      (1 + smooth.depth * 0.25) +
+      wave;
+
+    positionAttribute.array[iz] =
+      basePositions[iz] *
+      (1 + smooth.depth * 0.55);
+  }
+
+  positionAttribute.needsUpdate = true;
+
+  particles.position.z = smooth.depth * 1.5;
+
+  core.rotation.y += 0.004;
+  core.rotation.x += 0.002;
+
+  ring.rotation.z += 0.002;
+  ring.rotation.x += 0.001;
+
+  renderer.render(scene, camera);
+}
+
+requestAnimationFrame(animate);
+
+window.addEventListener("resize", () => {
+  camera.aspect =
+    window.innerWidth / window.innerHeight;
+
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(
+    window.innerWidth,
+    window.innerHeight
+  );
+});
+</script>
+
+</body>
+</html>
