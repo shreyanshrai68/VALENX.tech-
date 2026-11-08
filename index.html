@@ -5,58 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VALENX.tech</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <div id="particles-js"></div>
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;scroll-behavior:smooth;}
 body{background:#070b14;color:#e6edf3;overflow-x:hidden;}
-
-header{
-position:fixed;top:0;width:100%;display:flex;justify-content:space-between;align-items:center;
-padding:20px 60px;background:rgba(7,11,20,0.7);backdrop-filter:blur(12px);z-index:1000;
-}
+header{position:fixed;top:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:20px 60px;background:rgba(7,11,20,0.7);backdrop-filter:blur(12px);z-index:1000;}
 .logo{color:#00e0ff;font-weight:700;font-size:22px;}
 nav a{margin:0 12px;color:#c9d1d9;text-decoration:none;}
 nav a:hover{color:#00e0ff;}
-
 section{padding:120px 20px;max-width:1000px;margin:auto;}
-
 .hero{height:100vh;display:flex;flex-direction:column;justify-content:center;text-align:center;}
 .hero h1{font-size:52px;line-height:1.3;}
 .highlight{color:#00e0ff;}
 .hero p{margin-top:20px;color:#8b949e;font-size:18px;}
-
-.profile-img{
-width:200px;height:200px;border-radius:50%;
-margin:30px auto;display:block;
-border:4px solid #00e0ff;
-box-shadow:0 0 30px #00e0ff55;
-}
-
+.profile-img{width:200px;height:200px;border-radius:50%;margin:30px auto;display:block;border:4px solid #00e0ff;box-shadow:0 0 30px #00e0ff55;}
 .block{margin:80px 0;font-size:22px;color:#c9d1d9;opacity:0;transform:translateY(40px);transition:0.8s;}
 .block.show{opacity:1;transform:translateY(0);}
-
 .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;margin-top:40px;}
-.card{
-background:#0d1320;padding:25px;border-radius:14px;border:1px solid #1f2937;
-transition:0.4s;position:relative;overflow:hidden;
-}
-.card img{
-width:100%;border-radius:10px;margin-bottom:15px;
-}
-.card::before{
-content:"";position:absolute;width:100%;height:100%;top:0;left:-100%;
-background:linear-gradient(120deg,transparent,#00e0ff,transparent);
-transition:0.6s;
-}
+.card{background:#0d1320;padding:25px;border-radius:14px;border:1px solid #1f2937;transition:0.4s;position:relative;overflow:hidden;}
+.card img{width:100%;border-radius:10px;margin-bottom:15px;}
+.card::before{content:"";position:absolute;width:100%;height:100%;top:0;left:-100%;background:linear-gradient(120deg,transparent,#00e0ff,transparent);transition:0.6s;}
 .card:hover::before{left:100%;}
 .card:hover{transform:translateY(-6px) scale(1.02);border-color:#00e0ff;}
-
 .project-btn{display:inline-block;margin-top:10px;padding:10px 18px;border:1px solid #00e0ff;border-radius:6px;}
 .project-btn:hover{background:#00e0ff;color:#070b14;}
 
-/* ===== 3D ROUNDED PROJECT COVERFLOW ===== */
+/* 3D PROJECT CAROUSEL */
 #projects{max-width:100%;overflow:hidden;padding-left:0;padding-right:0;}
 #projects>h2{padding:0 20px;}
 .project-carousel{width:100%;max-width:1320px;margin:25px auto 0;position:relative;padding:0 28px 34px;perspective:1500px;isolation:isolate;}
@@ -77,253 +51,247 @@ transition:0.6s;
 .carousel-dots{display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:70%;}
 .carousel-dot{width:6px;height:6px;border:0;border-radius:50%;background:#51515b;padding:0;cursor:pointer;transition:.25s;}
 .carousel-dot.active{width:23px;border-radius:8px;background:#00e0ff;}
+
 @media(max-width:700px){
- .project-carousel{padding:0 8px 25px}
- .carousel-stage{height:365px}
- .project-slide{width:clamp(190px,65vw,270px);height:285px;transform:translate(-50%,-50%) translateX(calc(var(--offset)*145px)) translateZ(calc(var(--depth)*1px)) rotateY(calc(var(--offset)*-35deg)) scale(var(--scale));}
- .carousel-arrow{width:40px;height:40px;top:42%}.carousel-arrow.prev{left:8px}.carousel-arrow.next{right:8px}
- .project-card{border-radius:19px}
+.project-carousel{padding:0 8px 25px}
+.carousel-stage{height:365px}
+.project-slide{width:clamp(190px,65vw,270px);height:285px;transform:translate(-50%,-50%) translateX(calc(var(--offset)*145px)) translateZ(calc(var(--depth)*1px)) rotateY(calc(var(--offset)*-35deg)) scale(var(--scale));}
+.carousel-arrow{width:40px;height:40px;top:42%}
+.carousel-arrow.prev{left:8px}.carousel-arrow.next{right:8px}
+.project-card{border-radius:19px}
 }
 @media(prefers-reduced-motion:reduce){.project-slide,.project-card img,.carousel-arrow{transition:none!important}}
-
-
 footer{text-align:center;padding:40px;color:#6e7681;}
 
-  .about {
-    background: #0d1320;
-    padding: 100px 20px;
+/* ABOUT */
+.about{background:#0d1320;padding:100px 20px;}
+.about-container{display:flex;align-items:center;justify-content:center;gap:50px;flex-wrap:wrap;}
+.about-img img{width:220px;border-radius:20px;border:3px solid #00e0ff;box-shadow:0 0 30px #00e0ff55;animation:float 3s ease-in-out infinite;}
+.about-text{max-width:500px;animation:fadeInUp 1s ease;}
+.about-text h2{font-size:34px;margin-bottom:20px;color:#00e0ff;}
+.about-text p{font-size:18px;color:#c9d1d9;line-height:1.6;}
+.about-img{position:relative;}
+.about-img::before{content:"";position:absolute;inset:-3px;border-radius:25px;background:linear-gradient(45deg,#00e0ff,transparent,#00e0ff);z-index:0;animation:rotateBorder 4s linear infinite;}
+@keyframes rotateBorder{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.about-extra{position:absolute;width:100%;height:100%;pointer-events:none;top:0;left:0;}
+.energy-line{position:absolute;width:2px;height:100%;background:linear-gradient(transparent,#00e0ff,transparent);left:20%;animation:energyMove 3s linear infinite;opacity:.4;}
+.energy-line.delay{left:50%;animation-delay:1s;}
+.energy-line.delay2{left:80%;animation-delay:2s;}
+@keyframes energyMove{0%{transform:translateY(-100%)}100%{transform:translateY(100%)}}
+.about{transition:.3s;}
+.about:hover{box-shadow:inset 0 0 100px #00e0ff22;}
+.about-text:hover h2{text-shadow:0 0 10px #00e0ff,0 0 30px #00e0ff;}
+.about-img img{transition:transform .3s ease;}
+.about-img:hover img{transform:scale(1.08) rotate(1deg);}
+.ai-btn{margin-top:20px;padding:10px 18px;background:transparent;border:1px solid #00e0ff;color:#00e0ff;border-radius:8px;cursor:pointer;transition:.3s;}
+.ai-btn:hover{background:#00e0ff;color:#070b14;box-shadow:0 0 20px #00e0ff;}
+
+/* CONTACT POPUP */
+.contact-box{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8);display:none;justify-content:center;align-items:center;z-index:9999;}
+.contact-content{background:#0d1320;padding:40px;border-radius:16px;text-align:center;width:300px;border:1px solid #00e0ff;box-shadow:0 0 30px #00e0ff55;animation:fadeInUp .5s ease;}
+.contact-content h2{margin-bottom:10px;color:#00e0ff;}
+.contact-links a{display:block;margin:15px 0;padding:10px;border:1px solid #00e0ff;border-radius:8px;text-decoration:none;color:#00e0ff;transition:.3s;}
+.contact-links a:hover{background:#00e0ff;color:#070b14;box-shadow:0 0 15px #00e0ff;}
+.close-btn{position:absolute;right:20px;top:15px;cursor:pointer;color:#fff;}
+.hire-btn{padding:12px 25px;background:#00e0ff;border:none;border-radius:10px;cursor:pointer;font-weight:bold;transition:.3s;}
+.hire-btn:hover{box-shadow:0 0 20px #00e0ff;transform:scale(1.05);}
+
+/* SHOWREEL BASE */
+#valenx-showreel{
+position:relative;width:100%;max-width:none;height:500vh;margin:0;padding:0;
+--vx-progress:0;--vx-intro:0;--vx-zoom:0;--vx-reveal:0;--vx-finish:0;
+isolation:isolate;
+}
+#valenx-showreel .vx-shell{
+position:sticky;top:0;width:100%;height:100vh;height:100svh;min-height:520px;
+max-height:none;overflow:hidden;border:0;border-radius:0;box-shadow:none;
+background:#05090e;padding:0;display:flex;flex-direction:column;
+align-items:center;justify-content:center;
+}
+#valenx-showreel .vx-visual{position:absolute;inset:0;width:100%;height:100%;max-width:none;margin:0;z-index:0;perspective:none;animation:none;display:block;transform:none;}
+#valenx-showreel .vx-main-frame{position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:0;background:#07111a;box-shadow:none;transform:none!important;animation:none;overflow:hidden;}
+#valenx-showreel .vx-main-frame:before{display:none;}
+#valenx-showreel .vx-main-frame img{
+position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.76;
+filter:saturate(.88) contrast(1.08);
+transform:scale(calc(1.02 + var(--vx-zoom)*.52)) translate3d(calc(var(--vx-zoom)*-2.5%),calc(var(--vx-zoom)*-2%),0);
+transform-origin:center center;animation:none;will-change:transform;
+}
+#valenx-showreel .vx-main-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(90deg,rgba(3,8,14,.86),rgba(3,8,14,.24) 62%,rgba(3,8,14,.48)),linear-gradient(0deg,rgba(3,8,14,.82),transparent 68%);}
+#valenx-showreel .vx-orb{z-index:1;opacity:.5;pointer-events:none;}
+#valenx-showreel .vx-kicker,#valenx-showreel .vx-heading,#valenx-showreel .vx-sub,#valenx-showreel .vx-cta-row,#valenx-showreel .vx-hint{position:relative;z-index:6;}
+#valenx-showreel .vx-kicker{margin:0 0 18px;transform:translate3d(0,calc(var(--vx-intro)*-70px),0);opacity:calc(1 - var(--vx-intro));will-change:transform,opacity;}
+#valenx-showreel .vx-heading{font-size:clamp(38px,6.5vw,86px);max-width:1000px;padding:0 22px;transform:translate3d(0,calc(var(--vx-intro)*-100px),0) scale(calc(1 - var(--vx-intro)*.1));opacity:calc(1 - var(--vx-intro));will-change:transform,opacity;}
+#valenx-showreel .vx-sub{max-width:650px;padding:0 22px;margin:18px auto 0;transform:translate3d(0,calc(var(--vx-intro)*-65px),0);opacity:calc(1 - var(--vx-intro));will-change:transform,opacity;}
+#valenx-showreel .vx-main-copy{position:absolute;left:clamp(24px,9vw,140px);bottom:clamp(28px,8vh,85px);z-index:7;opacity:var(--vx-reveal);transform:translate3d(calc((1 - var(--vx-reveal))*-90px),calc((1 - var(--vx-reveal))*45px),0);will-change:transform,opacity;}
+#valenx-showreel .vx-main-copy small{display:block;color:#00e0ff;font-size:10px;letter-spacing:5px;margin-bottom:12px;}
+#valenx-showreel .vx-main-copy strong{display:block;font-size:clamp(30px,5vw,68px);letter-spacing:-2px;line-height:1.1;}
+#valenx-showreel .vx-main-copy span{display:block;color:#bdcbd4;font-size:clamp(11px,1.2vw,15px);margin-top:12px;letter-spacing:1px;}
+#valenx-showreel .vx-cta-row{margin-top:32px;transform:translate3d(0,calc((1 - var(--vx-finish))*55px),0);opacity:var(--vx-finish);will-change:transform,opacity;}
+#valenx-showreel .vx-hint{margin-top:22px;opacity:calc(1 - var(--vx-intro));transform:translateY(calc(var(--vx-intro)*25px));}
+#valenx-showreel .vx-ring,#valenx-showreel .vx-float-card{display:none!important;}
+#valenx-showreel .vx-shell #particles-js{position:absolute;inset:0;width:100%;height:100%;z-index:5;pointer-events:none;overflow:hidden;}
+#valenx-showreel .vx-shell #particles-js canvas{display:block;width:100%;height:100%;pointer-events:none;}
+@media(max-width:700px){
+#valenx-showreel{height:420vh;}
+#valenx-showreel .vx-shell{min-height:480px;padding:20px 0;}
+#valenx-showreel .vx-heading{font-size:clamp(34px,10vw,52px);letter-spacing:-1.5px;}
+#valenx-showreel .vx-sub{font-size:13px;margin:14px auto 0;}
+#valenx-showreel .vx-main-copy{left:22px;right:18px;bottom:34px;}
+#valenx-showreel .vx-main-copy strong{font-size:30px;}
+#valenx-showreel .vx-cta-row{gap:9px;}
+}
+@media(prefers-reduced-motion:reduce){
+#valenx-showreel{height:auto;}
+#valenx-showreel .vx-shell{position:relative;top:auto;height:100svh;}
+#valenx-showreel .vx-main-frame img{transform:none;}
+#valenx-showreel .vx-kicker,#valenx-showreel .vx-heading,#valenx-showreel .vx-sub,#valenx-showreel .vx-cta-row,#valenx-showreel .vx-hint{transform:none;opacity:1;}
+#valenx-showreel .vx-main-copy{transform:none;opacity:1;}
 }
 
-.about-container {
+/* EXTENDED MULTI-SCENE CINEMATIC JOURNEY */
+#valenx-showreel{height:1300vh!important;--vx-progress:0;}
+#valenx-showreel .vx-shell{isolation:isolate;background:#02060c;}
+#valenx-showreel .vx-main-frame img{
+opacity:.54;filter:saturate(.72) contrast(1.2) brightness(.72);
+transform:scale(calc(1.08 + var(--vx-zoom)*.78)) translate3d(calc(var(--vx-zoom)*-4%),calc(var(--vx-zoom)*-3%),0) rotate(calc(var(--vx-zoom)*-2deg));
+transition:filter .2s linear;
+}
+#valenx-showreel .vx-main-overlay{
+background:radial-gradient(ellipse at 50% 48%,transparent 0%,rgba(2,6,12,.16) 35%,rgba(2,6,12,.86) 100%),linear-gradient(90deg,rgba(2,6,12,.78),rgba(2,6,12,.1) 55%,rgba(2,6,12,.7));
+}
+#valenx-showreel .vx-kicker,#valenx-showreel .vx-heading,#valenx-showreel .vx-sub{transition:none;}
+#valenx-showreel .vx-cinema-scenes{position:absolute;inset:0;z-index:8;pointer-events:none;overflow:hidden;}
+#valenx-showreel .vx-scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px;opacity:0;visibility:hidden;will-change:transform,opacity,filter;}
+#valenx-showreel .vx-scene-index{color:#00e0ff;font-size:10px;letter-spacing:6px;font-weight:700;margin-bottom:28px;}
+#valenx-showreel .vx-scene h2{color:#f3fbff;font-size:clamp(48px,9vw,132px);line-height:.98;letter-spacing:-.065em;font-weight:700;text-shadow:0 12px 60px #0009;}
+#valenx-showreel .vx-scene h2 em{font-style:normal;color:#00e0ff;}
+#valenx-showreel .vx-scene h2 span{color:#00e0ff;}
+#valenx-showreel .vx-scene p{color:#c4d3dc;font-size:clamp(13px,1.5vw,18px);letter-spacing:2px;margin-top:26px;}
+#valenx-showreel .vx-scene-two h2{font-size:clamp(54px,10vw,145px);text-align:left;}
+#valenx-showreel .vx-scene-two{align-items:flex-start;padding-left:clamp(30px,14vw,220px);}
+#valenx-showreel .vx-scene-two p{margin-left:5px;}
+#valenx-showreel .vx-scene-three h2{font-size:clamp(42px,7vw,100px);margin-top:30px;}
+#valenx-showreel .vx-rotating-mark{width:clamp(120px,19vw,240px);height:clamp(120px,19vw,240px);border:1px solid #00e0ff88;border-radius:50%;display:grid;place-items:center;position:relative;box-shadow:0 0 80px #00e0ff22,inset 0 0 55px #00e0ff18;}
+#valenx-showreel .vx-rotating-mark b{font-size:clamp(65px,10vw,130px);color:#00e0ff;text-shadow:0 0 35px #00e0ff88;}
+#valenx-showreel .vx-rotating-mark i{position:absolute;inset:-17px;border:1px dashed #00e0ff66;border-radius:50%;}
+#valenx-showreel .vx-rotating-mark i:nth-child(2){inset:-34px;border-style:solid;opacity:.35;}
+#valenx-showreel .vx-rotating-mark i:nth-child(3){inset:18px;border-color:#fff4;transform:rotate(45deg) scaleX(1.4);}
+#valenx-showreel .vx-outline-text{color:transparent!important;-webkit-text-stroke:1.5px #00e0ff;font-size:clamp(70px,14vw,190px)!important;line-height:.82!important;letter-spacing:.02em!important;}
+#valenx-showreel .vx-scene-five h2{font-size:clamp(48px,8.5vw,120px);}
+#valenx-showreel .vx-cinema-progress{position:absolute;z-index:12;left:0;right:0;bottom:0;height:3px;background:#ffffff18;}
+#valenx-showreel .vx-cinema-progress span{display:block;width:100%;height:100%;background:#00e0ff;transform:scaleX(var(--vx-progress));transform-origin:left;box-shadow:0 0 15px #00e0ff;}
+#valenx-showreel .vx-cinema-counter{position:absolute;right:clamp(18px,5vw,70px);bottom:clamp(25px,5vh,55px);z-index:13;display:flex;gap:10px;align-items:center;color:#9eb4c0;font-size:11px;letter-spacing:3px;}
+#valenx-showreel .vx-cinema-counter b{color:#00e0ff;font-size:16px;}
+#valenx-showreel .vx-cinema-counter small{color:#00e0ff88;}
+#valenx-showreel .vx-shell #particles-js{pointer-events:auto;z-index:6;}
+#valenx-showreel .vx-shell #particles-js canvas{pointer-events:auto;}
+#valenx-showreel .vx-kicker,#valenx-showreel .vx-heading,#valenx-showreel .vx-sub{z-index:9;}
+#valenx-showreel .vx-main-copy{z-index:9;}
+#valenx-showreel .vx-cta-row{z-index:10;}
+@media(max-width:700px){
+#valenx-showreel{height:1050vh!important;}
+#valenx-showreel .vx-scene{padding:24px;}
+#valenx-showreel .vx-scene-index{font-size:9px;letter-spacing:4px;margin-bottom:22px;}
+#valenx-showreel .vx-scene h2{font-size:clamp(43px,12vw,72px);}
+#valenx-showreel .vx-scene-two{padding-left:12vw;}
+#valenx-showreel .vx-scene-two h2{font-size:clamp(48px,13vw,82px);}
+#valenx-showreel .vx-outline-text{font-size:clamp(64px,17vw,105px)!important;}
+#valenx-showreel .vx-scene p{font-size:11px;letter-spacing:1px;line-height:1.7;}
+#valenx-showreel .vx-cinema-counter{bottom:20px;right:18px;}
+}
+@media(prefers-reduced-motion:reduce){
+#valenx-showreel{height:auto!important;}
+#valenx-showreel .vx-cinema-scenes{display:none;}
+}
+
+/* --- EXACT HUMAN-TO-SKELETON X-RAY FLASHLIGHT EFFECT --- */
+.xray-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 50px;
-    flex-wrap: wrap;
-}
-
-.about-img img {
-    width: 220px;
-    border-radius: 20px;
-    border: 3px solid #00e0ff;
-    box-shadow: 0 0 30px #00e0ff55;
-    animation: float 3s ease-in-out infinite;
-}
-
-.about-text {
-    max-width: 500px;
-    animation: fadeInUp 1s ease;
-}
-
-.about-text h2 {
-    font-size: 34px;
-    margin-bottom: 20px;
-    color: #00e0ff;
-}
-
-.about-text p {
-    font-size: 18px;
-    color: #c9d1d9;
-    line-height: 1.6;
-}
-/* ===== GOD LEVEL ADD-ON ===== */
-
-/* glowing border rotate */
-.about-img {
-    position: relative;
-}
-
-.about-img::before {
-    content: "";
-    position: absolute;
-    inset: -3px;
-    border-radius: 25px;
-    background: linear-gradient(45deg, #00e0ff, transparent, #00e0ff);
-    z-index: 0;
-    animation: rotateBorder 4s linear infinite;
-}
-
-@keyframes rotateBorder {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* energy lines */
-.about-extra {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    top: 0;
-    left: 0;
-}
-
-.energy-line {
-    position: absolute;
-    width: 2px;
-    height: 100%;
-    background: linear-gradient(transparent, #00e0ff, transparent);
-    left: 20%;
-    animation: energyMove 3s linear infinite;
-    opacity: 0.4;
-}
-
-.energy-line.delay {
-    left: 50%;
-    animation-delay: 1s;
-}
-
-.energy-line.delay2 {
-    left: 80%;
-    animation-delay: 2s;
-}
-
-@keyframes energyMove {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(100%); }
-}
-
-/* mouse glow effect */
-.about {
-    transition: 0.3s;
-}
-
-.about:hover {
-    box-shadow: inset 0 0 100px #00e0ff22;
-}
-
-/* text glow on hover */
-.about-text:hover h2 {
-    text-shadow: 0 0 10px #00e0ff, 0 0 30px #00e0ff;
-}
-
-/* image parallax feel */
-.about-img img {
-    transition: transform 0.3s ease;
-}
-
-.about-img:hover img {
-    transform: scale(1.08) rotate(1deg);
-}
-  .ai-btn {
-    margin-top: 20px;
-    padding: 10px 18px;
-    background: transparent;
-    border: 1px solid #00e0ff;
-    color: #00e0ff;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.ai-btn:hover {
-    background: #00e0ff;
-    color: #070b14;
-    box-shadow: 0 0 20px #00e0ff;
-}
-  /* ===== CONTACT POPUP ===== */
-
-.contact-box {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.8);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
-
-.contact-content {
-    background: #0d1320;
-    padding: 40px;
-    border-radius: 16px;
     text-align: center;
-    width: 300px;
-    border: 1px solid #00e0ff;
-    box-shadow: 0 0 30px #00e0ff55;
-    animation: fadeInUp 0.5s ease;
+    background-color: #030712;
 }
 
-.contact-content h2 {
-    margin-bottom: 10px;
-    color: #00e0ff;
-}
-
-.contact-links a {
-    display: block;
-    margin: 15px 0;
-    padding: 10px;
-    border: 1px solid #00e0ff;
-    border-radius: 8px;
-    text-decoration: none;
-    color: #00e0ff;
-    transition: 0.3s;
-}
-
-.contact-links a:hover {
-    background: #00e0ff;
-    color: #070b14;
-    box-shadow: 0 0 15px #00e0ff;
-}
-
-.close-btn {
+.xray-layer {
     position: absolute;
-    right: 20px;
-    top: 15px;
-    cursor: pointer;
-    color: #fff;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    pointer-events: none;
 }
 
-.hire-btn {
-    padding: 12px 25px;
-    background: #00e0ff;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
+/* 1. Base Layer: Normal Image */
+.xray-base {
+    background-image: url('Endless Neon Blue Faces.png'); /* Yahan normal photo ka link dalein */
+    filter: brightness(0.3) contrast(1.2);
 }
 
-.hire-btn:hover {
-    box-shadow: 0 0 20px #00e0ff;
-    transform: scale(1.05);
+/* 2. Reveal Layer: X-Ray / Skeleton Image (Jo torch ke andar dikhegi) */
+.xray-reveal {
+    background-image: url('Neon X-Ray Skull Horizon.png'); /* Yahan X-ray/Skeleton photo ka link dalein */
+    filter: brightness(1.3) contrast(1.5) drop-shadow(0 0 20px rgba(0, 224, 255, 0.8));
+    
+    /* Smooth Torch/Mask Effect */
+    -webkit-mask-image: radial-gradient(circle 200px at var(--x, 50%) var(--y, 50%), black 15%, rgba(0,0,0,0.4) 65%, transparent 100%);
+    mask-image: radial-gradient(circle 200px at var(--x, 50%) var(--y, 50%), black 15%, rgba(0,0,0,0.4) 65%, transparent 100%);
+    
+    transition: mask-image 0.08s cubic-bezier(0.1, 0.7, 0.1, 1), -webkit-mask-image 0.08s cubic-bezier(0.1, 0.7, 0.1, 1);
 }
-  #matrix{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-z-index:-5;
-opacity:0.08;
+
+/* CRT Scanlines Texture Overlay */
+.xray-scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+    background-size: 100% 3px, 4px 100%;
+    pointer-events: none;
+    z-index: 2;
 }
-  @keyframes floatParticle{
-0%{
-transform:translateY(0);
+
+.xray-content {
+    position: relative;
+    z-index: 3;
+    pointer-events: auto;
 }
-100%{
-transform:translateY(-100vh);
+
+.xray-content h1 {
+    font-size: clamp(3rem, 6vw, 5rem);
+    letter-spacing: 6px;
+    margin-bottom: 12px;
+    color: #ffffff;
+    text-shadow: 0 0 30px rgba(0, 224, 255, 0.5);
 }
+
+.xray-content p {
+    font-size: 1.25rem;
+    color: #93c5fd;
+    letter-spacing: 2px;
 }
 </style>
-  <!-- Google tag (gtag.js) -->
+
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WSJSZRZBEL"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-WSJSZRZBEL');
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());
+gtag('config','G-WSJSZRZBEL');
 </script>
 </head>
-
 <body>
-  <canvas id="matrix"></canvas>
-
-<header>
+  <header>
 <div class="logo">Shreyansh</div>
 <nav>
 <a href="#">Home</a>
@@ -331,6 +299,17 @@ transform:translateY(-100vh);
 <a href="#projects">Projects</a>
 </nav>
 </header>
+
+<!-- EXACT X-RAY HUMAN TO SKELETON HERO SECTION -->
+<section class="xray-container" id="xrayHero">
+    <div class="xray-layer xray-base"></div>
+    <div class="xray-layer xray-reveal" id="xrayRevealLayer"></div>
+    <div class="xray-scanlines"></div>
+    <div class="xray-content">
+        <h1>VALENX.TECH</h1>
+        <p>Full-Stack Developer & Creative Designer</p>
+    </div>
+</section>
 
 <section class="hero">
 <h1>I wasn’t always a <span class="highlight">developer</span>.</h1>
@@ -351,124 +330,242 @@ transform:translateY(-100vh);
 <div class="block">And this… is just the beginning.</div>
 </section>
 
+<!-- CINEMATIC SHOWREEL -->
+<section id="valenx-showreel">
+<div class="vx-shell">
+
+<div class="vx-orb one"></div>
+<div class="vx-orb two"></div>
+
+<div class="vx-cinema-scenes" aria-hidden="true">
+  <div class="vx-scene vx-scene-one">
+    <span class="vx-scene-index">01 / THE BEGINNING</span>
+    <h2>Curiosity<br><em>starts everything.</em></h2>
+    <p>One question. Countless possibilities.</p>
+  </div>
+
+  <div class="vx-scene vx-scene-two">
+    <span class="vx-scene-index">02 / THE PROCESS</span>
+    <h2>Imagine<span>.</span><br>Build<span>.</span><br>Repeat<span>.</span></h2>
+    <p>Every detail has a purpose.</p>
+  </div>
+
+  <div class="vx-scene vx-scene-three">
+    <span class="vx-scene-index">03 / THE CRAFT</span>
+    <div class="vx-rotating-mark"><b>V</b><i></i><i></i><i></i></div>
+    <h2>Design in motion.</h2>
+    <p>Where creativity meets clean code.</p>
+  </div>
+
+  <div class="vx-scene vx-scene-four">
+    <span class="vx-scene-index">04 / THE VISION</span>
+    <h2 class="vx-outline-text">THINK<br>BEYOND</h2>
+    <p>Not just pages. Digital experiences.</p>
+  </div>
+
+  <div class="vx-scene vx-scene-five">
+    <span class="vx-scene-index">05 / WHAT'S NEXT</span>
+    <h2>Let's make<br><em>something real.</em></h2>
+    <p>The next idea could start right here.</p>
+  </div>
+</div>
+
+<div class="vx-cinema-progress"><span></span></div>
+<div class="vx-cinema-counter"><b>01</b><small>—</small><span>05</span></div>
+
+<div class="vx-kicker">VALENX.TECH · CREATIVE DEVELOPER</div>
+
+<h2 class="vx-heading">Ideas become <span>experiences.</span></h2>
+
+<p class="vx-sub">
+I build digital experiences where thoughtful design meets technology.
+Explore a glimpse of the worlds I create.
+</p>
+
+<div class="vx-visual" id="vxVisual">
+<div class="vx-main-frame">
+<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1400&q=90" alt="Creative workspace">
+<div class="vx-main-overlay"></div>
+
+<div class="vx-main-copy">
+<small>DESIGN · CODE · CREATE</small>
+<strong>Beyond the ordinary.</strong>
+<span>Turning curiosity into digital reality.</span>
+</div>
+
+</div>
+</div>
+
+<div id="particles-js" aria-hidden="true"></div>
+
+<div class="vx-cta-row">
+<a class="vx-cta primary" href="#projects">Explore Projects ↗</a>
+<a class="vx-cta" href="#contact">Let's Connect</a>
+</div>
+
+<div class="vx-hint">A little imagination goes a long way</div>
+
+</div>
+</section>
+
 <section id="projects">
 <h2 style="text-align:center;font-size:34px;margin-bottom:40px;">Projects</h2>
 
 <div class="project-carousel" id="projectCarousel">
-  <div class="carousel-stage" aria-label="3D project showcase">
-    <article class="project-slide" data-index="0"><div class="project-card">
-<img src="https://picsum.photos/400?1">
-<h3>Project 1</h3>
+<div class="carousel-stage" aria-label="3D project showcase">
+
+<article class="project-slide" data-index="0"><div class="project-card">
+<img src="https://picsum.photos/400?1"><h3>Project 1</h3>
 <a href="index (2).html"><span class="project-btn">Open</span></a>
 </div></article>
-    <article class="project-slide" data-index="1"><div class="project-card">
-<img src="https://picsum.photos/400?2">
-<h3>Project 2</h3>
+
+<article class="project-slide" data-index="1"><div class="project-card">
+<img src="https://picsum.photos/400?2"><h3>Project 2</h3>
 <a href="index (3).html"><span class="project-btn">Open</span></a>
 </div></article>
-    <article class="project-slide" data-index="2"><div class="project-card">
-<img src="https://picsum.photos/400?3">
-<h3>Project 3</h3>
+
+<article class="project-slide" data-index="2"><div class="project-card">
+<img src="https://picsum.photos/400?3"><h3>Project 3</h3>
 <a href="index (4).html"><span class="project-btn">Open</span></a>
 </div></article>
-    <article class="project-slide" data-index="3"><div class="project-card">
-<img src="https://picsum.photos/400?4">
-<h3>Project 4</h3>
+
+<article class="project-slide" data-index="3"><div class="project-card">
+<img src="https://picsum.photos/400?4"><h3>Project 4</h3>
 <a href="index (5).html"><span class="project-btn">Open</span></a>
 </div></article>
-    <article class="project-slide" data-index="4"><div class="project-card">
-<img src="https://picsum.photos/400?5">
-<h3>Project 5</h3>
+
+<article class="project-slide" data-index="4"><div class="project-card">
+<img src="https://picsum.photos/400?5"><h3>Project 5</h3>
 <a href="index (6).html"><span class="project-btn">Open</span></a>
 </div></article>
-    <article class="project-slide" data-index="5"><div class="project-card">
-<img src="https://picsum.photos/400?6">
-<h3>Project 6</h3>
+
+<article class="project-slide" data-index="5"><div class="project-card">
+<img src="https://picsum.photos/400?6"><h3>Project 6</h3>
 <a href="index (7).html"><span class="project-btn">Open</span></a>
 </div></article>
-    <article class="project-slide" data-index="6"><div class="project-card">
-<img src="https://picsum.photos/400?7">
-<h3>Project 7</h3>
+
+<article class="project-slide" data-index="6"><div class="project-card">
+<img src="https://picsum.photos/400?7"><h3>Project 7</h3>
 <a href="index (8).html"><span class="project-btn">Open</span></a>
 </div></article>
-    <article class="project-slide" data-index="7"><div class="project-card">
-<img src="https://picsum.photos/400?8">
-<h3>Project 8</h3>
+
+<article class="project-slide" data-index="7"><div class="project-card">
+<img src="https://picsum.photos/400?8"><h3>Project 8</h3>
 <a href="index (9).html"><span class="project-btn">Open</span></a>
 </div></article>
-    <article class="project-slide" data-index="8"><div class="project-card">
-<img src="https://picsum.photos/400?9">
-<h3>Project 9</h3>
+
+<article class="project-slide" data-index="8"><div class="project-card">
+<img src="https://picsum.photos/400?9"><h3>Project 9</h3>
 <a href="index (10).html"><span class="project-btn">Open</span></a>
 </div></article>
-    <article class="project-slide" data-index="9"><div class="project-card">
-<img src="https://picsum.photos/400?10">
-<h3>Project 10</h3>
+
+<article class="project-slide" data-index="9"><div class="project-card">
+<img src="https://picsum.photos/400?10"><h3>Project 10</h3>
 <a href="index (11).html"><span class="project-btn">Open</span></a>
 </div></article>
-    <article class="project-slide" data-index="10"><div class="project-card">
-<img src="https://picsum.photos/400?11">
-<h3>Project 11</h3>
+
+<article class="project-slide" data-index="10"><div class="project-card">
+<img src="https://picsum.photos/400?11"><h3>Project 11</h3>
 <a href="index (12).html"><span class="project-btn">Open</span></a>
 </div></article>
-    <article class="project-slide" data-index="11"><div class="project-card">
-<img src="https://picsum.photos/400?12">
-<h3>Project 12</h3>
+
+<article class="project-slide" data-index="11"><div class="project-card">
+<img src="https://picsum.photos/400?12"><h3>Project 12</h3>
 <a href="index (13).html"><span class="project-btn">Open</span></a>
 </div></article>
-    <article class="project-slide" data-index="12"><div class="project-card">
-<img src="https://picsum.photos/400?13">
-<h3>Project 13</h3>
+
+<article class="project-slide" data-index="12"><div class="project-card">
+<img src="https://picsum.photos/400?13"><h3>Project 13</h3>
 <a href="index (14).html"><span class="project-btn">Open</span></a>
 </div></article>
-    <article class="project-slide" data-index="13"><div class="project-card">
-<img src="https://picsum.photos/400?14">
-<h3>Project 14</h3>
+
+<article class="project-slide" data-index="13"><div class="project-card">
+<img src="https://picsum.photos/400?14"><h3>Project 14</h3>
 <a href="index (15).html"><span class="project-btn">Open</span></a>
 </div></article>
-    <article class="project-slide" data-index="14"><div class="project-card">
-<img src="https://picsum.photos/400?15">
-<h3>Project 15</h3>
+
+<article class="project-slide" data-index="14"><div class="project-card">
+<img src="https://picsum.photos/400?15"><h3>Project 15</h3>
 <a href="index (16).html"><span class="project-btn">Open</span></a>
 </div></article>
-    <article class="project-slide" data-index="15"><div class="project-card">
-<img src="https://picsum.photos/400?16">
-<h3>Project 16</h3>
+
+<article class="project-slide" data-index="15"><div class="project-card">
+<img src="https://picsum.photos/400?16"><h3>Project 16</h3>
 <a href="index (17).html"><span class="project-btn">Open</span></a>
 </div></article>
-    <article class="project-slide" data-index="16"><div class="project-card">
-<img src="https://picsum.photos/400?17">
-<h3>Project 17</h3>
+
+<article class="project-slide" data-index="16"><div class="project-card">
+<img src="https://picsum.photos/400?17"><h3>Project 17</h3>
 <a href="index (18).html"><span class="project-btn">Open</span></a>
 </div></article>
-    <article class="project-slide" data-index="17"><div class="project-card">
-<img src="https://picsum.photos/400?18">
-<h3>Project 18</h3>
+
+<article class="project-slide" data-index="17"><div class="project-card">
+<img src="https://picsum.photos/400?18"><h3>Project 18</h3>
 <a href="index (19).html"><span class="project-btn">Open</span></a>
 </div></article>
-    <article class="project-slide" data-index="18"><div class="project-card">
-<img src="https://picsum.photos/400?19">
-<h3>Project 19</h3>
+
+<article class="project-slide" data-index="18"><div class="project-card">
+<img src="https://picsum.photos/400?19"><h3>Project 19</h3>
 <a href="index (20).html"><span class="project-btn">Open</span></a>
 </div></article>
-  </div>
-  <button class="carousel-arrow prev" type="button" aria-label="Previous project">&#10094;</button>
-  <button class="carousel-arrow next" type="button" aria-label="Next project">&#10095;</button>
-  <div class="carousel-footer">
-    <span class="carousel-count" aria-live="polite">01 / 19</span>
-    <div class="carousel-dots" aria-label="Choose a project"></div>
-  </div>
-</div>  <div style="text-align:center; margin-top:50px;">
-    <button onclick="openContact()" class="hire-btn">🚀 Create Your Project</button>
+
+</div>
+
+<button class="carousel-arrow prev" type="button" aria-label="Previous project">&#10094;</button>
+<button class="carousel-arrow next" type="button" aria-label="Next project">&#10095;</button>
+
+<div class="carousel-footer">
+<span class="carousel-count" aria-live="polite">01 / 19</span>
+<div class="carousel-dots" aria-label="Choose a project"></div>
+</div>
+</div>
+
+<div style="text-align:center;margin-top:50px;">
+<button onclick="openContact()" class="hire-btn">🚀 Create Your Project</button>
 </div>
 </section>
 
-<footer>
-This is just the beginning.
-</footer>
+<footer>This is just the beginning.</footer>
+
+<div id="contactBox" class="contact-box">
+<div class="contact-content">
+<span onclick="closeContact()" class="close-btn">✖</span>
+<h2>Let's Build Something Amazing 🚀</h2>
+<p>Choose how you want to connect with me:</p>
+
+<div class="contact-links">
+<a href="mailto:shreyanshrai909@gmail.com">📧 Email Me</a>
+<a href="tel:7233900096">📱 Call Me</a>
+<a href="https://instagram.com/YOUR_INSTAGRAM_HERE" target="_blank">📸 Instagram</a>
+</div>
+</div>
+</div>
+
+<section class="about">
+<div class="about-container">
+<div class="about-img">
+<img src="shreyansh.png" alt="My Photo">
+</div>
+
+<div class="about-text">
+<h2>About Me</h2>
+<p>
+Hello! I'm a passionate developer who loves creating cool and futuristic websites.
+I enjoy working with animations, designs, and building unique projects that stand out.
+</p>
+</div>
+</div>
+
+<div class="about-extra">
+<div class="energy-line"></div>
+<div class="energy-line delay"></div>
+<div class="energy-line delay2"></div>
+</div>
+</section>
 
 <script>
 const blocks=document.querySelectorAll('.block');
+
 window.addEventListener('scroll',()=>{
 blocks.forEach(b=>{
 const pos=b.getBoundingClientRect().top;
@@ -476,341 +573,387 @@ if(pos<window.innerHeight-100){b.classList.add('show');}
 });
 });
 </script>
-<div id="contactBox" class="contact-box">
 
-    <div class="contact-content">
-        <span onclick="closeContact()" class="close-btn">✖</span>
-
-        <h2>Let's Build Something Amazing 🚀</h2>
-
-        <p>Choose how you want to connect with me:</p>
-
-        <div class="contact-links">
-
-            <a href="mailto:shreyanshrai909@gmail.com">📧 Email Me</a>
-
-            <a href="tel:+917233900096">📱 Call Me</a>
-
-            <a href="https://instagram.com/shreyanshrai457" target="_blank">
-                📸 Instagram
-            </a>
-
-        </div>
-
-    </div>
-
-</div>
-</body>
-</html>
-<section id="contact" style="padding:100px 20px; text-align:center;">
-  <h2 style="font-size:32px; margin-bottom:20px;">Let's Connect</h2>
-  
-  <p style="color:#8b949e; max-width:500px; margin:auto;">
-    If you liked my work, have an idea, or just want to talk — feel free to reach out.
-  </p>
-
-  <div style="margin-top:30px; font-size:18px;">
-    
-    <p>
-      📧 Email: 
-      <a href="mailto:shreyanshrai909@gmail.com" style="color:#00e0ff;">
-        shreyanshrai909@gmail.com
-      </a>
-    </p>
-
-    <p style="margin-top:10px;">
-      📱 Phone: (+91) 7233900096
-    </p>
-
-    <div style="margin-top:20px;">
-      <a href="#" style="margin:0 10px; color:#00e0ff;">LinkedIn</a>
-      <a href="#" style="margin:0 10px; color:#00e0ff;">GitHub</a>
-      <a href="#" style="margin:0 10px; color:#00e0ff;">Instagram</a>
-    </div>
-
-<style>
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-}
-
-@keyframes glow {
-  0%, 100% { box-shadow: 0 0 20px #00e0ff, 0 0 40px #00e0ff33; }
-  50% { box-shadow: 0 0 40px #00e0ff, 0 0 80px #00e0ff66; }
-}
-
-@keyframes slideIn {
-  from { opacity: 0; transform: translateX(-50px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.profile-img { animation: float 3s ease-in-out infinite, glow 2s ease-in-out infinite; }
-
-header { animation: slideIn 0.8s ease-out; }
-
-.hero h1 { animation: fadeInUp 1s ease-out; }
-
-.hero p { animation: fadeInUp 1.2s ease-out; }
-
-.card { animation: fadeInUp 0.6s ease-out backwards; }
-
-.card:nth-child(1) { animation-delay: 0.1s; }
-.card:nth-child(2) { animation-delay: 0.2s; }
-.card:nth-child(3) { animation-delay: 0.3s; }
-.card:nth-child(4) { animation-delay: 0.4s; }
-.card:nth-child(5) { animation-delay: 0.5s; }
-.card:nth-child(6) { animation-delay: 0.6s; }
-
-button { animation: fadeInUp 1.4s ease-out; transition: all 0.3s; }
-
-button:hover { 
-  background: #00d4ff;
-  box-shadow: 0 0 20px #00e0ff;
-  transform: scale(1.05);
-}
-
-section#contact { animation: fadeInUp 1s ease-out; }
-</style>
 <script>
-// Smooth scroll for navigation links
-document.querySelectorAll('nav a').forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    const target = document.querySelector(link.getAttribute('href'));
-    if(target) target.scrollIntoView({ behavior: 'smooth' });
-  });
+/* EXTENDED CINEMATIC SCROLL CONTROLLER — 5 DISTINCT SCENES */
+(()=>{
+const section=document.getElementById('valenx-showreel');
+if(!section)return;
+
+const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(reduced)return;
+
+const clamp=v=>Math.max(0,Math.min(1,v));
+const smooth=v=>{v=clamp(v);return v*v*(3-2*v);};
+const scenes=[...section.querySelectorAll('.vx-scene')];
+const counter=section.querySelector('.vx-cinema-counter b');
+let ticking=false;
+
+function updateAnimation(){
+const rect=section.getBoundingClientRect();
+const travel=Math.max(1,section.offsetHeight-window.innerHeight);
+const progress=clamp(-rect.top/travel);
+
+const intro=smooth(progress/.075);
+const zoom=smooth((progress-.035)/.48);
+const reveal=smooth((progress-.88)/.10);
+const finish=smooth((progress-.94)/.055);
+
+section.style.setProperty('--vx-progress',progress.toFixed(4));
+section.style.setProperty('--vx-intro',intro.toFixed(4));
+section.style.setProperty('--vx-zoom',zoom.toFixed(4));
+section.style.setProperty('--vx-reveal',reveal.toFixed(4));
+section.style.setProperty('--vx-finish',finish.toFixed(4));
+
+const ranges=[
+[.105,.245,'zoom'],
+[.285,.425,'slide'],
+[.465,.605,'rotate'],
+[.645,.785,'glitch'],
+[.825,.965,'final']
+];
+
+ranges.forEach((range,i)=>{
+const [a,b,type]=range;
+const local=clamp((progress-a)/(b-a));
+const enter=smooth(local/.22);
+const leave=smooth((local-.76)/.24);
+const opacity=clamp(enter*(1-leave));
+const el=scenes[i];
+if(!el)return;
+
+el.style.visibility=opacity>.005?'visible':'hidden';
+el.style.opacity=opacity.toFixed(3);
+
+if(type==='zoom'){
+el.style.transform=`scale(${1.18-.18*enter}) translate3d(0,${(1-enter)*45}px,0)`;
+el.style.filter=`blur(${(1-enter)*12}px)`;
+}else if(type==='slide'){
+el.style.transform=`translate3d(${(1-enter)*-130}px,0,0) skewY(${(1-enter)*-3}deg)`;
+el.style.filter=`blur(${(1-enter)*8}px)`;
+}else if(type==='rotate'){
+const mark=el.querySelector('.vx-rotating-mark');
+el.style.transform=`perspective(900px) rotateY(${(1-enter)*-28}deg) translateY(${(1-enter)*40}px)`;
+el.style.filter=`blur(${(1-enter)*10}px)`;
+if(mark)mark.style.transform=`rotate(${progress*720}deg)`;
+}else if(type==='glitch'){
+const jitter=(1-enter)*5;
+el.style.transform=`translate3d(${Math.sin(progress*150)*jitter}px,${Math.cos(progress*130)*jitter}px,0) scale(${.94+.06*enter})`;
+el.style.filter=`blur(${(1-enter)*9}px) contrast(${1+enter*.5})`;
+}else{
+el.style.transform=`scale(${.82+.18*enter}) translateY(${(1-enter)*55}px)`;
+el.style.filter=`blur(${(1-enter)*12}px)`;
+}
 });
 
-// Dark/Light mode toggle
-const toggleTheme = () => {
-  document.body.style.background = document.body.style.background === 'rgb(7, 11, 20)' ? '#f5f5f5' : '#070b14';
-  document.body.style.color = document.body.style.color === 'rgb(230, 237, 243)' ? '#333' : '#e6edf3';
+if(counter){
+const active=ranges.findIndex(([a,b])=>progress>=a&&progress<=b);
+counter.textContent=String(active<0?(progress<.105?1:5):active+1).padStart(2,'0');
+}
+ticking=false;
+}
+
+function requestUpdate(){
+if(!ticking){requestAnimationFrame(updateAnimation);ticking=true;}
+}
+
+window.addEventListener('scroll',requestUpdate,{passive:true});
+window.addEventListener('resize',requestUpdate);
+updateAnimation();
+})();
+</script>
+
+<section id="contact" style="padding:100px 20px;text-align:center;">
+<h2 style="font-size:32px;margin-bottom:20px;">Let's Connect</h2>
+
+<p style="color:#8b949e;max-width:500px;margin:auto;">
+If you liked my work, have an idea, or just want to talk — feel free to reach out.
+</p>
+
+<div style="margin-top:30px;font-size:18px;">
+<p>📧 Email: <a href="mailto:shreyanshrai909@gmail.com" style="color:#00e0ff;">shreyanshrai909@gmail.com</a></p>
+<p style="margin-top:10px;">📱 Phone: 7233900096 </p>
+
+<div style="margin-top:20px;">
+<a href="#" style="margin:0 10px;color:#00e0ff;">LinkedIn</a>
+<a href="#" style="margin:0 10px;color:#00e0ff;">GitHub</a>
+<a href="https://instagram.com/YOUR_INSTAGRAM_HERE" style="margin:0 10px;color:#00e0ff;">Instagram</a>
+</div>
+</div>
+</section>
+
+<script>
+// Smooth scroll for navigation links
+document.querySelectorAll('nav a').forEach(link=>{
+link.addEventListener('click',e=>{
+e.preventDefault();
+const target=document.querySelector(link.getAttribute('href'));
+if(target)target.scrollIntoView({behavior:'smooth'});
+});
+});
+
+// Dark / Light mode toggle
+const toggleTheme=()=>{
+document.body.style.background=document.body.style.background==='rgb(7, 11, 20)'?'#f5f5f5':'#070b14';
+document.body.style.color=document.body.style.color==='rgb(230, 237, 243)'?'#333':'#e6edf3';
 };
 
-// Add theme toggle button to header
-const themeBtn = document.createElement('button');
-themeBtn.textContent = '🌙';
-themeBtn.style.cssText = 'background:none;border:none;font-size:20px;cursor:pointer;color:#00e0ff;';
-themeBtn.addEventListener('click', toggleTheme);
+const themeBtn=document.createElement('button');
+themeBtn.textContent='🌙';
+themeBtn.style.cssText='background:none;border:none;font-size:20px;cursor:pointer;color:#00e0ff;';
+themeBtn.addEventListener('click',toggleTheme);
 document.querySelector('header nav').appendChild(themeBtn);
 
 // Scroll progress indicator
-const progressBar = document.createElement('div');
-progressBar.style.cssText = 'position:fixed;top:0;left:0;height:3px;background:#00e0ff;z-index:999;transition:width 0.2s;';
+const progressBar=document.createElement('div');
+progressBar.style.cssText='position:fixed;top:0;left:0;height:3px;background:#00e0ff;z-index:999;transition:width .2s;';
 document.body.appendChild(progressBar);
 
-window.addEventListener('scroll', () => {
-  const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-  progressBar.style.width = scrollPercent + '%';
+window.addEventListener('scroll',()=>{
+const scrollPercent=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100;
+progressBar.style.width=scrollPercent+'%';
 });
 
 // Back to top button
-const backToTop = document.createElement('button');
-backToTop.innerHTML = '↑ Top';
-backToTop.style.cssText = 'position:fixed;bottom:30px;right:30px;padding:10px 15px;background:#00e0ff;border:none;border-radius:8px;cursor:pointer;display:none;z-index:999;font-weight:bold;';
+const backToTop=document.createElement('button');
+backToTop.innerHTML='↑ Top';
+backToTop.style.cssText='position:fixed;bottom:30px;right:30px;padding:10px 15px;background:#00e0ff;border:none;border-radius:8px;cursor:pointer;display:none;z-index:999;font-weight:bold;';
 document.body.appendChild(backToTop);
 
-window.addEventListener('scroll', () => {
-  backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+window.addEventListener('scroll',()=>{
+backToTop.style.display=window.scrollY>300?'block':'none';
 });
 
-backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+backToTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 </script>
-<section class="about">
-    <div class="about-container">
-        
-        <div class="about-img">
-            <img src="shreyansh.png" alt="My Photo">
-        </div>
-
-        <div class="about-text">
-            <h2>About Me</h2>
-            <p>
-                Hello! I'm a passionate developer who loves creating cool and futuristic websites. 
-                I enjoy working with animations, designs, and building unique projects that stand out.
-            </p>
-        </div>
-
-    </div>
-    <div class="about-extra">
-    <div class="energy-line"></div>
-    <div class="energy-line delay"></div>
-    <div class="energy-line delay2"></div>
 
 <script>
 function openContact(){
-    document.getElementById("contactBox").style.display = "flex";
+document.getElementById("contactBox").style.display="flex";
 }
 
 function closeContact(){
-    document.getElementById("contactBox").style.display = "none";
+document.getElementById("contactBox").style.display="none";
 }
 </script>
+
 <script>
-particlesJS("particles-js", {
-  particles: {
-    number: { value: 80 },
-    size: { value: 3 },
-    move: { speed: 2 }
-  }
+(()=>{
+const root=document.getElementById('projectCarousel');
+if(!root)return;
+
+const slides=[...root.querySelectorAll('.project-slide')];
+const dotsWrap=root.querySelector('.carousel-dots');
+const count=root.querySelector('.carousel-count');
+const prev=root.querySelector('.carousel-arrow.prev');
+const next=root.querySelector('.carousel-arrow.next');
+
+let active=0;
+let startX=0;
+
+slides.forEach((_,i)=>{
+const dot=document.createElement('button');
+dot.type='button';
+dot.className='carousel-dot';
+dot.setAttribute('aria-label',`Show project ${i+1}`);
+dot.addEventListener('click',()=>{
+active=i;
+render();
 });
-</script>
-<script>
-(() => {
-  const root = document.getElementById('projectCarousel');
-  if (!root) return;
-  const slides = [...root.querySelectorAll('.project-slide')];
-  const dotsWrap = root.querySelector('.carousel-dots');
-  const count = root.querySelector('.carousel-count');
-  const prev = root.querySelector('.carousel-arrow.prev');
-  const next = root.querySelector('.carousel-arrow.next');
-  let active = 0;
-  let startX = 0;
+dotsWrap.appendChild(dot);
+});
 
-  slides.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.type = 'button';
-    dot.className = 'carousel-dot';
-    dot.setAttribute('aria-label', `Show project ${i + 1}`);
-    dot.addEventListener('click', () => { active = i; render(); });
-    dotsWrap.appendChild(dot);
-  });
-  const dots = [...dotsWrap.children];
+const dots=[...dotsWrap.children];
 
-  function render() {
-    slides.forEach((slide, i) => {
-      let offset = i - active;
-      const total = slides.length;
-      if (offset > total / 2) offset -= total;
-      if (offset < -total / 2) offset += total;
-      const distance = Math.abs(offset);
-      slide.style.setProperty('--offset', offset);
-      slide.style.setProperty('--depth', distance === 0 ? 75 : -distance * 105);
-      slide.style.setProperty('--scale', distance === 0 ? 1 : Math.max(.56, 1 - distance * .13));
-      slide.style.setProperty('--opacity', distance > 3 ? 0 : Math.max(.2, 1 - distance * .22));
-      slide.style.setProperty('--z', 20 - distance);
-      slide.classList.toggle('is-active', distance === 0);
-      slide.setAttribute('aria-hidden', distance === 0 ? 'false' : 'true');
-    });
-    dots.forEach((dot, i) => dot.classList.toggle('active', i === active));
-    count.textContent = `${String(active + 1).padStart(2,'0')} / ${String(slides.length).padStart(2,'0')}`;
-  }
-  function move(step) { active = (active + step + slides.length) % slides.length; render(); }
-  prev.addEventListener('click', () => move(-1));
-  next.addEventListener('click', () => move(1));
-  root.addEventListener('keydown', e => {
-    if (e.key === 'ArrowLeft') move(-1);
-    if (e.key === 'ArrowRight') move(1);
-  });
-  root.tabIndex = 0;
-  root.addEventListener('touchstart', e => { startX = e.changedTouches[0].clientX; }, {passive:true});
-  root.addEventListener('touchend', e => {
-    const delta = e.changedTouches[0].clientX - startX;
-    if (Math.abs(delta) > 45) move(delta < 0 ? 1 : -1);
-  }, {passive:true});
-  render();
+function render(){
+slides.forEach((slide,i)=>{
+let offset=i-active;
+const total=slides.length;
+
+if(offset>total/2)offset-=total;
+if(offset<-total/2)offset+=total;
+
+const distance=Math.abs(offset);
+
+slide.style.setProperty('--offset',offset);
+slide.style.setProperty('--depth',distance===0?75:-distance*105);
+slide.style.setProperty('--scale',distance===0?1:Math.max(.56,1-distance*.13));
+slide.style.setProperty('--opacity',distance>3?0:Math.max(.2,1-distance*.22));
+slide.style.setProperty('--z',20-distance);
+
+slide.classList.toggle('is-active',distance===0);
+slide.setAttribute('aria-hidden',distance===0?'false':'true');
+});
+
+dots.forEach((dot,i)=>dot.classList.toggle('active',i===active));
+count.textContent=`${String(active+1).padStart(2,'0')} / ${String(slides.length).padStart(2,'0')}`;
+}
+
+function move(step){
+active=(active+step+slides.length)%slides.length;
+render();
+}
+
+prev.addEventListener('click',()=>move(-1));
+next.addEventListener('click',()=>move(1));
+
+root.addEventListener('keydown',e=>{
+if(e.key==='ArrowLeft')move(-1);
+if(e.key==='ArrowRight')move(1);
+});
+
+root.tabIndex=0;
+
+root.addEventListener('touchstart',e=>{
+startX=e.changedTouches[0].clientX;
+},{passive:true});
+
+root.addEventListener('touchend',e=>{
+const delta=e.changedTouches[0].clientX-startX;
+if(Math.abs(delta)>45)move(delta<0?1:-1);
+},{passive:true});
+
+render();
 })();
 </script>
-<script>const letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
+<script>
+const letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let interval=null;
 
 document.querySelector(".logo").onmouseover=event=>{
-
 let iteration=0;
-
 clearInterval(interval);
 
 interval=setInterval(()=>{
-
 event.target.innerText=event.target.innerText
 .split("")
 .map((letter,index)=>{
-
-if(index<iteration){
-return "Shreyansh"[index];
-}
-
+if(index<iteration)return "Shreyansh"[index];
 return letters[Math.floor(Math.random()*26)];
 })
 .join("");
 
-if(iteration>=event.target.innerText.length){
-clearInterval(interval);
-}
-
+if(iteration>=event.target.innerText.length)clearInterval(interval);
 iteration+=1/3;
-
 },30);
-
 };
 </script>
-<script>const canvas=document.getElementById("matrix");
-const ctx=canvas.getContext("2d");
 
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
-const matrixLetters="01";
-const fontSize=14;
-const columns=canvas.width/fontSize;
+<script>
+/* PARTICLES — ONLY INSIDE THE SHOWREEL */
+(()=>{
+const host=document.getElementById('particles-js');
+if(!host||typeof particlesJS!=='function')return;
 
-const drops=[];
+particlesJS('particles-js',{
+particles:{
+number:{value:72,density:{enable:true,value_area:760}},
+color:{value:'#00e0ff'},
+shape:{type:'circle'},
+opacity:{value:.62,random:true},
+size:{value:2.8,random:true},
+line_linked:{enable:true,distance:135,color:'#00e0ff',opacity:.20,width:1},
+move:{enable:true,speed:1.1,direction:'none',random:true,straight:false,out_mode:'bounce',bounce:true}
+},
+interactivity:{
+detect_on:'canvas',
+events:{
+onhover:{enable:true,mode:'grab'},
+onclick:{enable:true,mode:'push'},
+resize:true
+},
+modes:{
+grab:{distance:175,line_linked:{opacity:.55}},
+push:{particles_nb:14}
+}
+},
+retina_detect:true
+});
 
-for(let x=0;x<columns;x++){
-drops[x]=1;
+let pointer={x:-9999,y:-9999};
+
+window.addEventListener('pointermove',e=>{
+pointer.x=e.clientX;
+pointer.y=e.clientY;
+},{passive:true});
+
+const attract=()=>{
+const instance=window.pJSDom&&window.pJSDom[0]&&window.pJSDom[0].pJS;
+
+if(instance&&instance.particles&&instance.particles.array){
+const rect=host.getBoundingClientRect();
+
+if(rect.bottom>0&&rect.top<window.innerHeight){
+instance.particles.array.forEach(p=>{
+const px=rect.left+p.x;
+const py=rect.top+p.y;
+const dx=pointer.x-px;
+const dy=pointer.y-py;
+const d=Math.hypot(dx,dy);
+
+if(d>10&&d<190){
+const force=(1-d/190)*.0011;
+p.vx+=dx*force;
+p.vy+=dy*force;
+}
+});
+}
 }
 
-function draw(){
+requestAnimationFrame(attract);
+};
 
-ctx.fillStyle="rgba(0,0,0,0.05)";
-ctx.fillRect(0,0,canvas.width,canvas.height);
-
-ctx.fillStyle="#00e0ff";
-ctx.font=fontSize+"px monospace";
-
-for(let i=0;i<drops.length;i++){
-
-const text=matrixLetters[Math.floor(Math.random()*matrixLetters.length)];
-
-ctx.fillText(text,i*fontSize,drops[i]*fontSize);
-
-if(drops[i]*fontSize>canvas.height && Math.random()>0.975){
-drops[i]=0;
+const wait=()=>{
+if(window.pJSDom&&window.pJSDom.length){
+attract();
+}else{
+setTimeout(wait,100);
 }
+};
 
-drops[i]++;
-}
-
-}
-
-setInterval(draw,33);
+wait();
+})();
 </script>
-<script>for(let i=0;i<50;i++){
 
-const particle=document.createElement("div");
+<!-- Exact Human-to-Skeleton X-Ray Effect JavaScript with Smooth Lerp Trailing -->
+<script>
+const heroSection = document.getElementById('xrayHero');
+const revealLayer = document.getElementById('xrayRevealLayer');
 
-particle.style.position="fixed";
-particle.style.width="3px";
-particle.style.height="3px";
+if (heroSection && revealLayer) {
+    let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    let current = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    
+    heroSection.addEventListener('mousemove', (e) => {
+        const rect = heroSection.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+    });
 
-particle.style.background="#00e0ff";
-particle.style.borderRadius="50%";
+    heroSection.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 0) {
+            const rect = heroSection.getBoundingClientRect();
+            mouse.x = e.touches[0].clientX - rect.left;
+            mouse.y = e.touches[0].clientY - rect.top;
+        }
+    });
 
-particle.style.left=Math.random()*100+"vw";
-particle.style.top=Math.random()*100+"vh";
+    function animateXray() {
+        current.x += (mouse.x - current.x) * 0.12;
+        current.y += (mouse.y - current.y) * 0.12;
 
-particle.style.opacity="0.2";
+        revealLayer.style.setProperty('--x', `${current.x}px`);
+        revealLayer.style.setProperty('--y', `${current.y}px`);
 
-particle.style.animation=
-`floatParticle ${5+Math.random()*10}s linear infinite`;
-
-document.body.appendChild(particle);
-
+        requestAnimationFrame(animateXray);
+    }
+    
+    animateXray();
 }
 </script>
+
+</body>
+</html>
